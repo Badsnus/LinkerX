@@ -30,7 +30,7 @@ class LinksApiView(viewsets.ModelViewSet):
 class LinkRedirect(views.generic.RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         redirect_link = shortcuts.get_object_or_404(
-            Link, short_url=kwargs['custom_url']
+            Link, custom_url=kwargs['custom_url']
         )
         ip = (self.request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0]
               or self.request.META.get("REMOTE_ADDR"))
