@@ -123,4 +123,4 @@ REST_FRAMEWORK = {
     ),
 }
 
-SHORT_URL_LETTERS = ascii_lowercase + digits
+URL_LETTERS = ascii_lowercase + digits

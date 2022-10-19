@@ -11,10 +11,10 @@ class LinksApiView(viewsets.ModelViewSet):
     queryset = Link.objects.all()
 
     def get_permissions(self):
-        if self.action == 'list':
+        if self.action in ('list', 'update'):
             permission_classes = [permissions.IsAdminUser]
         else:
-            permission_classes = [permissions.IsAuthenticated, IsOwnerOfLink]
+            permission_classes = [IsOwnerOfLink]
         return [permission() for permission in permission_classes]
 
     def retrieve(self, request, *args, **kwargs):
@@ -30,7 +30,7 @@ class LinksApiView(viewsets.ModelViewSet):
 class LinkRedirect(views.generic.RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         redirect_link = shortcuts.get_object_or_404(
-            Link, short_url=kwargs['short_url']
+            Link, short_url=kwargs['custom_url']
         )
         ip = (self.request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0]
               or self.request.META.get("REMOTE_ADDR"))

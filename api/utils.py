@@ -1,13 +1,14 @@
 from random import choices
 
-from LinkerX.settings import SHORT_URL_LETTERS
+from LinkerX.settings import URL_LETTERS
 from .models import Link
 
 
-def create_short_link() -> str:
-    short_url = ''.join(choices(SHORT_URL_LETTERS, k=5))
-    link = Link.objects.filter(short_url=short_url)
+def create_custom_url(length: int) -> str:
+    custom_url = ''.join(choices(URL_LETTERS, k=length))
+    link = Link.objects.filter(custom_url=custom_url)
+
     while link:
-        short_url = ''.join(choices(SHORT_URL_LETTERS, k=5))
-        link = Link.objects.filter(short_url=short_url)
-    return short_url
+        custom_url = ''.join(choices(URL_LETTERS, k=length))
+        link = Link.objects.filter(custom_url=custom_url)
+    return custom_url
