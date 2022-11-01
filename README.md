@@ -37,7 +37,7 @@ username, password - strings
 
 ## Links
 
-## Запросы нужно отправлять
+## Запросы нужно отправлять c
 
 Authorization Token {TOKEN}
 
