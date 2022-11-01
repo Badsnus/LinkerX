@@ -11,7 +11,7 @@ class LinksApiView(viewsets.ModelViewSet):
     queryset = Link.objects.all()
 
     def get_permissions(self):
-        if self.action in ('list', 'update'):
+        if self.action in {'list', 'update', 'destroy', 'partial_update'}:
             permission_classes = [permissions.IsAdminUser]
         else:
             permission_classes = [IsOwnerOfLink]
